@@ -1,3 +1,5 @@
+import threading
+
 import requests
 import json
 
@@ -43,7 +45,8 @@ class Listener:
         """
         try:
             #   处理私聊消息
-            self.sendPrivateMsg(user_id, f'你发送了=> {msg}')
+            #   self.sendPrivateMsg(user_id, f'你发送了=> {msg}')
+            threading.Thread(target=self.sendPrivateMsg, args=(user_id, f'你发送了=> {msg}')).start()
             return
         except Exception as e:
             print(f"error=> {e}")
